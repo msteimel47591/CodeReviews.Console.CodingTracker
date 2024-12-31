@@ -42,7 +42,7 @@ namespace CodingTracker
                 var sql = $@"INSERT INTO {tableName} (StartTime, EndTime, Duration, Focus) 
                              VALUES (@StartTime, @EndTime, @Duration, @Focus)";
 
-                var rowsAffected = connection.Execute(sql, new
+                connection.Execute(sql, new
                 {
                     StartTime = codingSession.StartTime,
                     EndTime = codingSession.EndTime,

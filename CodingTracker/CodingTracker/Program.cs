@@ -63,7 +63,10 @@ namespace CodingTracker
 
                     }
                 }
-                catch (MenuExitException) { }
+                catch (MenuExitException)
+                { 
+                    ///Exception intentionally ignored.
+                }
                 
             }
 
