@@ -70,7 +70,7 @@ namespace CodingTracker
             {
                 var sql = $@"DELETE FROM {tableName} WHERE Id = @Id";
 
-                var rowsAffected = connection.Execute(sql, new { Id = id });
+                connection.Execute(sql, new { Id = id });
 
             }
         }
@@ -86,7 +86,7 @@ namespace CodingTracker
                          Focus = @Focus 
                      WHERE Id = @Id";
 
-                var rowsAffected = connection.Execute(sql, new
+                connection.Execute(sql, new
                 {
                     Id = codingSession.Id,
                     StartTime = codingSession.StartTime,

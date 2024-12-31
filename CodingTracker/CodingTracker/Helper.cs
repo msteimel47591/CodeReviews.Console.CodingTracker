@@ -160,7 +160,6 @@ namespace CodingTracker
                 }
             }
 
-            DateTime originalDateTime = DateTime.ParseExact(dateInput, "MM/dd/yy", new CultureInfo("en-US"), DateTimeStyles.None);
 
             // Convert the DateTime object to the desired format string
             string formattedDateString = inputDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);

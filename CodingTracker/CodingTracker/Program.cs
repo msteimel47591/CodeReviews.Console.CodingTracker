@@ -1,5 +1,4 @@
 ﻿using Spectre.Console;
-using System.Configuration;
 using System.Collections.Specialized;
 using CodingTracker.Models;
 
@@ -64,11 +63,8 @@ namespace CodingTracker
 
                     }
                 }
-                catch (MenuExitException)
-                {
-
-                    
-                }
+                catch (MenuExitException) { }
+                
             }
 
             Console.WriteLine("Goodbye!");
