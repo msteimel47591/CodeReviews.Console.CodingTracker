@@ -1,6 +1,5 @@
 ﻿using CodingTracker.Models;
 using Microsoft.Data.Sqlite;
-using System.Configuration;
 using Dapper;
 
 
@@ -8,8 +7,8 @@ namespace CodingTracker
 {
     internal static class DBAccess
     {
-        private static string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
-        private static string tableName = ConfigurationManager.AppSettings.Get("TableName");
+        private static string connectionString = System.Configuration.ConfigurationManager.AppSettings.Get("ConnectionString");
+        private static string tableName = System.Configuration.ConfigurationManager.AppSettings.Get("TableName");
 
         internal static void CreateDatabase()
         {
