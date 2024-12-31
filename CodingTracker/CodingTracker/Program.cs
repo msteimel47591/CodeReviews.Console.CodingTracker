@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 using System.Collections.Specialized;
 using CodingTracker.Models;
+using System.Diagnostics;
 
 namespace CodingTracker
 {
@@ -63,7 +64,10 @@ namespace CodingTracker
 
                     }
                 }
-                catch (MenuExitException) {}
+                catch (MenuExitException)
+                {
+                    Debug.WriteLine("Caught MenuExitException");
+                }
 
                 
             }
