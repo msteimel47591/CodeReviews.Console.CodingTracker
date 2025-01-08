@@ -1,9 +1,11 @@
-﻿using Spectre.Console;
-using System.Collections.Specialized;
-using CodingTracker.Models;
+﻿using CodingTracker.Models;
 using System.Diagnostics;
+using CodingTrackerDBAccess;
+using CodingTrackerExceptions;
+using CodingTrackerHelpers;
+using CodingTrackerUserInterface;
 
-namespace CodingTracker
+namespace CodingTrackerProgram
 {
     internal class Program
     {
@@ -61,15 +63,12 @@ namespace CodingTracker
                             Console.WriteLine("\n\nPress any key to return to main menu.\n\n");
                             Console.ReadLine();
                             break;
-
                     }
                 }
                 catch (MenuExitException)
                 {
                     Debug.WriteLine("Caught MenuExitException");
-                }
-
-                
+                }  
             }
 
             Console.WriteLine("Goodbye!");

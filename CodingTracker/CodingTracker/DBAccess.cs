@@ -2,8 +2,7 @@
 using Microsoft.Data.Sqlite;
 using Dapper;
 
-
-namespace CodingTracker
+namespace CodingTrackerDBAccess
 {
     internal static class DBAccess
     {
@@ -37,7 +36,6 @@ namespace CodingTracker
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-
                 var sql = $@"INSERT INTO {tableName} (StartTime, EndTime, Duration, Focus) 
                              VALUES (@StartTime, @EndTime, @Duration, @Focus)";
 
@@ -48,7 +46,6 @@ namespace CodingTracker
                     Duration = codingSession.Duration,
                     Focus = codingSession.Focus
                 });
-
             }
         }
 
@@ -68,9 +65,7 @@ namespace CodingTracker
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 var sql = $@"DELETE FROM {tableName} WHERE Id = @Id";
-
                 connection.Execute(sql, new { Id = id });
-
             }
         }
 
@@ -93,10 +88,8 @@ namespace CodingTracker
                     Duration = codingSession.Duration,
                     Focus = codingSession.Focus
                 });
-
             }
         }
-
         public static List<CodingSession> GetSessionsByDay(DateTime date)
         {
             using (var connection = new SqliteConnection(connectionString))
@@ -110,8 +103,7 @@ namespace CodingTracker
                 Duration 
             FROM {tableName}
             WHERE strftime('%Y-%m-%d', '20' || substr(StartTime, 7, 2) || '-' || substr(StartTime, 1, 2) || '-' || substr(StartTime, 4, 2)) = @Date";
-
-
+                
                 return connection.Query<CodingSession>(query, new { Date = date.ToString("yyyy-MM-dd") }).ToList();
             }
         }
@@ -130,7 +122,7 @@ namespace CodingTracker
         FROM {tableName}
         WHERE strftime('%W', '20' || substr(StartTime, 7, 2) || '-' || substr(StartTime, 1, 2) || '-' || substr(StartTime, 4, 2)) = strftime('%W', @Date)
           AND strftime('%Y', '20' || substr(StartTime, 7, 2) || '-' || substr(StartTime, 1, 2) || '-' || substr(StartTime, 4, 2)) = strftime('%Y', @Date)";
-
+                
                 return connection.Query<CodingSession>(query, new { Date = date.ToString("yyyy-MM-dd") }).ToList();
             }
         }

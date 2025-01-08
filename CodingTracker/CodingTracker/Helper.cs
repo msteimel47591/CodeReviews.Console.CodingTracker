@@ -1,7 +1,9 @@
 ﻿using CodingTracker.Models;
 using System.Globalization;
+using CodingTrackerDBAccess;
+using CodingTrackerExceptions;
 
-namespace CodingTracker
+namespace CodingTrackerHelpers
 {
     internal static class Helper
     {
@@ -96,8 +98,6 @@ namespace CodingTracker
                     throw new MenuExitException();
                 }
             }
-
-
             return id;
         }
 
@@ -134,8 +134,6 @@ namespace CodingTracker
                     throw new MenuExitException();
                 }
             }
-
-
             DBAccess.DeleteSession(id);
         }
 
@@ -160,13 +158,9 @@ namespace CodingTracker
                 }
             }
 
-
-            // Convert the DateTime object to the desired format string
             string formattedDateString = inputDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            // Parse the formatted string back to a DateTime object
             DateTime formattedDateTime = DateTime.ParseExact(formattedDateString, "yyyy-MM-dd", new CultureInfo("en-US"), DateTimeStyles.None);
-
 
             return formattedDateTime;
         }
@@ -192,12 +186,9 @@ namespace CodingTracker
                 }
             }
 
-            // Convert the DateTime object to the desired format string
             string formattedDateString = inputDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            // Parse the formatted string back to a DateTime object
             DateTime formattedDateTime = DateTime.ParseExact(formattedDateString, "yyyy-MM-dd", new CultureInfo("en-US"), DateTimeStyles.None);
-
 
             return formattedDateTime;
         }
@@ -223,20 +214,11 @@ namespace CodingTracker
                 }
             }
 
-            // Convert the DateTime object to the desired format string
             string formattedDateString = inputDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            // Parse the formatted string back to a DateTime object
             DateTime formattedDateTime = DateTime.ParseExact(formattedDateString, "yyyy-MM-dd", new CultureInfo("en-US"), DateTimeStyles.None);
-
 
             return formattedDateTime;
         }
-
-
     }
-
-    
-
-
 }

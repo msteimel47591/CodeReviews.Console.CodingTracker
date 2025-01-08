@@ -1,5 +1,4 @@
-﻿
-namespace CodingTracker
+﻿namespace CodingTrackerExceptions
 {
     internal class MenuExitException : Exception
     {

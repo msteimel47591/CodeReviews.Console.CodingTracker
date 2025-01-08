@@ -1,9 +1,10 @@
 ﻿using CodingTracker.Models;
 using Spectre.Console;
-using System.Configuration.Internal;
 using System.Diagnostics;
+using CodingTrackerDBAccess;
+using CodingTrackerHelpers;
 
-namespace CodingTracker
+namespace CodingTrackerUserInterface
 {
     internal static class UserInterface
     {
@@ -11,14 +12,11 @@ namespace CodingTracker
         {
             Console.Clear();
 
-            // Create a table
             var table = new Table();
 
-            // Add some columns
             table.AddColumn("Operation");
             table.AddColumn("Description");
             table.Title = new TableTitle("[blue]Coding Session Main Menu[/]");
-            // Add some rows
             table.AddRow("Exit", "[white]Exits the application[/]");
             table.AddRow("Add", "[white]Allows the user to add a coding session to the database[/]");
             table.AddRow("Delete", "[white]Allows the user to delete a coding session from the database[/]");
@@ -28,10 +26,8 @@ namespace CodingTracker
             table.AddRow("View Filtered Entries", "[white]Allows the user to apply filters to view certain coding sessions stored in the database[/]");
             table.AddRow("View Report", "[white]Allows the user to view summaries of the coding sessions stored in the database[/]");
 
-            // Render the table to the console
             AnsiConsole.Write(table);
 
-            // Ask for the user's input
             var selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What [white]operation do you want to perform? Use up or down arrow keys to make selection.[/]")
@@ -49,23 +45,18 @@ namespace CodingTracker
         {
             Console.Clear();
 
-            // Create a table
             var table = new Table();
 
-            // Add some columns
             table.AddColumn("Filter By");
             table.AddColumn("Description");
             table.Title = new TableTitle("[blue]Coding Session Main Menu[/]");
-            // Add some rows
             table.AddRow("Day", "[white]Shows all coding sessions that exist for a specified day[/]");
             table.AddRow("Week", "[white]Shows all coding sessions that exist for a specified week[/]");
             table.AddRow("Month", "[white]Shows all coding sessions that exsit for a specified Month[/]");
             table.AddRow("Edit", "[white]Shows all coding sessions that exist for a specified year[/]");
             
-            // Render the table to the console
             AnsiConsole.Write(table);
 
-            // Ask for the user's input
             var selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What [white]operation do you want to perform? Use up or down arrow keys to make selection.[/]")
@@ -73,9 +64,7 @@ namespace CodingTracker
                     .AddChoices(new[] {
             "Day", "Week", "Month",
             "Year"}));
-
             return selection;
-
         }
 
         internal static void AddSession()
@@ -107,10 +96,8 @@ namespace CodingTracker
         {
             Console.Clear();
 
-            // Create a table
             var table = new Table();
 
-            // Add some columns
             table.AddColumn("ID");
             table.AddColumn("Start Timestamp");
             table.AddColumn("End Timestamp");
@@ -118,14 +105,11 @@ namespace CodingTracker
             table.AddColumn("Focus");
             table.Title = new TableTitle("[blue]Coding Sessions[/]");
 
-            // Add some rows
             foreach (var session in codingSessions)
             {
                 table.AddRow(session.Id.ToString(), session.StartTime, session.EndTime, session.Duration, session.Focus);
             }
-
             AnsiConsole.Write(table);
-
         }
 
         internal static void DeleteSession()
@@ -195,15 +179,13 @@ namespace CodingTracker
 
             Console.WriteLine("\n\nPress any key to end the session.\n\n");
 
-            // Loop to update the elapsed time display
             while (!Console.KeyAvailable)
             {
                 Console.SetCursorPosition(0, Console.CursorTop);
                 Console.Write($"Elapsed time: {stopwatch.Elapsed:hh\\:mm\\:ss}");
-                System.Threading.Thread.Sleep(1000); // Update every second
+                System.Threading.Thread.Sleep(1000);
             }
 
-            // Wait for the user to press any key
             Console.ReadKey(true);
 
             stopwatch.Stop();
@@ -287,7 +269,6 @@ namespace CodingTracker
             {
                 Console.WriteLine("\n\nWarning: One or more sessions have a corrupt duration value.");
             }
-
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 

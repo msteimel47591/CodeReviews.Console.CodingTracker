@@ -1,4 +1,4 @@
-﻿
+﻿using CodingTrackerHelpers;
 namespace CodingTracker.Models
 {
     internal class CodingSession
